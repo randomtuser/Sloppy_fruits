@@ -1,5 +1,6 @@
 package view;
 
+import model.model;
 import view.allPanels.BalanceWindow;
 import view.allPanels.EndWindow;
 import view.tab.tabv4;
@@ -11,8 +12,10 @@ import java.awt.event.ActionListener;
 public class End extends JFrame {
     tabv4 bar;
     EndWindow end;
-    public End(){
-        end  = new EndWindow();
+    model m;
+    public End(model m){
+        this.m = m;
+        end  = new EndWindow(m);
 
         this.add(end);
         bar = new tabv4();
@@ -30,4 +33,10 @@ public class End extends JFrame {
     public void setActionListener(ActionListener listener){
         end.setActionListener(listener);
     }
+
+    public void updateScore(){
+        end.updateScore();
+    }
+
+
 }

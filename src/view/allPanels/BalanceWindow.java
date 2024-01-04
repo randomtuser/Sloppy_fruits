@@ -1,5 +1,6 @@
 package view.allPanels;
 
+import model.model;
 import view.Balance;
 
 import javax.swing.*;
@@ -8,48 +9,41 @@ import java.awt.event.ActionListener;
 
 public class BalanceWindow extends JPanel{
     JTextField addBalance;
-    JTextField withdrawBalance;
     JButton returnAndSave, end;
-    public BalanceWindow(){
-        this.setLayout(new GridLayout(8, 1)); // 7 rows for components and spacing, 1 column
+    model m;
+    JLabel currentBalanceLabel;
+    public BalanceWindow(model m){
+        this.m = m;
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JLabel balanceName = new JLabel("BALANCE CONFIGURATOR", SwingConstants.CENTER);
         balanceName.setFont(new Font("Serif", Font.BOLD, 80));
         balanceName.setForeground(Color.decode("#800080"));
+        balanceName.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         this.add(balanceName);
         this.add(Box.createRigidArea(new Dimension(0, 50)));
 
 
 
 
-        JPanel allPanel = new JPanel(new GridLayout(2,1));
 
         JLabel addBalanceLabel = new JLabel("ADD BALANCE:");
         addBalanceLabel.setFont(new Font("Serif", Font.BOLD, 40));
-        addBalance = new JTextField();
-        addBalance.setPreferredSize(new Dimension(200, 40)); // Set desired width and height
-        JPanel namePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        addBalance = new JTextField("1");
+        addBalance.setPreferredSize(new Dimension(200, 40));
+        addBalance.setActionCommand("addBalance");
+        JPanel namePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         namePanel.add(addBalanceLabel);
         namePanel.add(addBalance);
-        allPanel.add(namePanel);
+        this.add(namePanel);
 
-
-        JLabel currentBalanceLabel = new JLabel("CURRENT BALANCE:");
+        currentBalanceLabel = new JLabel("CURRENT BALANCE: "+ m.getBalance());
         currentBalanceLabel.setFont(new Font("Serif", Font.BOLD, 40));
-        JPanel currentBalancePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JPanel currentBalancePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         currentBalancePanel.add(currentBalanceLabel);
-        allPanel.add(currentBalancePanel);
+        this.add(currentBalancePanel);
 
 
-        JLabel withdrawBalanceLabel = new JLabel("WITHDRAW BALANCE:");
-        withdrawBalanceLabel.setFont(new Font("Serif", Font.BOLD, 40));
-        withdrawBalance = new JTextField();
-        withdrawBalance.setPreferredSize(new Dimension(200, 40));
-        JPanel withdrawBalancePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        withdrawBalancePanel.add(withdrawBalanceLabel);
-        withdrawBalancePanel.add(withdrawBalance);
-        allPanel.add(withdrawBalancePanel);
-        allPanel.setBorder((BorderFactory.createEmptyBorder(0, 40, 0, 40)));
-        this.add(allPanel);
+
 
 
 
@@ -59,18 +53,18 @@ public class BalanceWindow extends JPanel{
         returnAndSave = new JButton("SAVE");
         returnAndSave.setFont(new Font("Serif", Font.BOLD, 40));
         returnAndSave.setBackground(Color.decode("#87CEEB"));
-        returnAndSave.setPreferredSize(new Dimension(300, 80)); // Set the preferred size of the button
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        returnAndSave.setPreferredSize(new Dimension(300, 80));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         returnAndSave.setActionCommand("SAVE");
         buttonPanel.add(returnAndSave);
-        buttonPanel.setBorder((BorderFactory.createEmptyBorder(0, 40, 0, 40)));
+        buttonPanel.setBorder((BorderFactory.createEmptyBorder(0, 40, 0, 10)));
         this.add(buttonPanel);
 
         end = new JButton("END GAME");
         end.setFont(new Font("Serif", Font.BOLD, 40));
         end.setBackground(Color.decode("#87CEEB"));
-        end.setPreferredSize(new Dimension(300, 80)); // Set the preferred size of the button
-        JPanel buttonPanelend = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        end.setPreferredSize(new Dimension(300, 80));
+        JPanel buttonPanelend = new JPanel(new FlowLayout(FlowLayout.CENTER));
         end.setActionCommand("END");
         buttonPanelend.add(end);
         buttonPanelend.setBorder((BorderFactory.createEmptyBorder(0, 40, 0, 40)));
@@ -80,5 +74,14 @@ public class BalanceWindow extends JPanel{
     public void setActionListener(ActionListener listener){
         returnAndSave.addActionListener(listener);
         end.addActionListener(listener);
+    }
+
+    public void increaseBalanceLabel() {
+        currentBalanceLabel.setText("CURRENT BALANCE: " + m.getBalance());
+        currentBalanceLabel.revalidate();
+        currentBalanceLabel.repaint();
+    }
+    public int getBalance(){
+        return Integer.parseInt(addBalance.getText());
     }
 }

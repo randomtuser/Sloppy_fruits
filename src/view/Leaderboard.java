@@ -1,5 +1,6 @@
 package view;
 
+import model.model;
 import view.allPanels.*;
 import view.tab.*;
 
@@ -10,8 +11,10 @@ import java.awt.event.ActionListener;
 public class Leaderboard extends JFrame {
     tabv3 bar;
     leaderboardWindow leaderboardWindow;
-    public Leaderboard(){
-        leaderboardWindow = new leaderboardWindow();
+    model m;
+    public Leaderboard(model m){
+        this.m = m;
+        leaderboardWindow = new leaderboardWindow(m);
 
         bar = new tabv3();
         this.setJMenuBar(bar);
@@ -32,4 +35,11 @@ public class Leaderboard extends JFrame {
         bar.setActionListener(listener);
     }
 
+
+    public void display(){
+        leaderboardWindow.display();
+    }
+    public void clearPlayers(){
+        leaderboardWindow.clearPlayers();
+    }
 }

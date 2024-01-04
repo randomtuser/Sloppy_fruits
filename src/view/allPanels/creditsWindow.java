@@ -13,7 +13,7 @@ public class creditsWindow  extends JPanel {
         JLabel j1 = new JLabel("<html>App designed as a project at University of Valencia, during the subject User interfaces. School year 2023/2024</html>");        j1.setFont(new Font("Serif", Font.PLAIN, 40));
         j1.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
 
-        JLabel j = new JLabel("@Isabela & Tilen 2023", SwingConstants.CENTER);
+        JLabel j = new JLabel("@Isabella & Tilen 2023", SwingConstants.CENTER);
         j.setFont(new Font("Serif", Font.PLAIN, 40));
 
         title.setAlignmentX(Component.CENTER_ALIGNMENT);

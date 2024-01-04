@@ -1,17 +1,26 @@
 package view;
+import model.*;
 import view.allPanels.*;
 import view.tab.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 public class Game  extends JFrame {
     tabv5 bar;
-    public Game(){
-        gameWindow game  = new gameWindow();
-
-        this.add(game);
+    model m;
+    WestWindowGame game;
+    eastPanelGame east;
+    public Game(model m){
+        this.m = m;
+        game  = new WestWindowGame(m);
+        NorthPanelGame north = new NorthPanelGame();
+        east = new eastPanelGame(m);
+        add(north, "North");
+        add(east, "East");
+        add(game, "West");
         bar = new tabv5();
         this.setJMenuBar(bar);
 
@@ -27,5 +36,51 @@ public class Game  extends JFrame {
     }
     public void setActionListener(ActionListener listener){
         bar.setActionListener(listener);
+        east.setActionListener(listener);
     }
+
+    public void updateBalanceLabel() {
+        east.updateBalanceLabel();
+
+    }
+    public void setMouseListenerLabel1(MouseListener listener){
+        game.setMouseListenerLabel1(listener);
+    }
+    public void setMouseListenerLabel2(MouseListener listener){
+        game.setMouseListenerLabel2(listener);
+    }
+    public void setMouseListenerLabel3(MouseListener listener){
+        game.setMouseListenerLabel3(listener);
+    }
+
+    public void updatePics(String permited) {
+        game.updatePics(permited);
+    }
+    public void changeTheme() {
+        game.changeTheme();
+    }
+
+    public  void selectedL1(){
+        game.selectedL1();
+    }
+    public  void unselectedL1(){
+        game.unselectedL1();
+
+    }
+
+    public  void selectedL2(){
+        game.selectedL2();
+    }
+    public  void unselectedL2(){
+        game.unselectedL2();
+
+    }
+    public  void selectedL3(){
+        game.selectedL3();
+    }
+    public  void unselectedL3(){
+        game.unselectedL3();
+
+    }
+
 }

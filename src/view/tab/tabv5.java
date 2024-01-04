@@ -9,7 +9,7 @@ public class tabv5 extends JMenuBar {
     private JMenuItem exitItem;
 
     public tabv5(){
-        archive = new JMenu("FILE");
+        archive = new JMenu("APP");
         exitItem = new JMenuItem("Exit");
         exitItem.setActionCommand("exit");
         archive.add(exitItem);
@@ -28,11 +28,7 @@ public class tabv5 extends JMenuBar {
         this.add(MENU);
 
 
-        balance = new JMenu("BALANCE/END THE GAME");
-        balanceManage = new JMenuItem("manage balance");
-        balanceManage.setActionCommand("balanceManage");
-        balance.add(balanceManage);
-        this.add(balance);
+
 
     }
 
@@ -40,7 +36,6 @@ public class tabv5 extends JMenuBar {
         MENUshow.addActionListener(listener);
         LEADERBOARDshow.addActionListener(listener);
         exitItem.addActionListener(listener);
-        balanceManage.addActionListener(listener);
     }
 }
 

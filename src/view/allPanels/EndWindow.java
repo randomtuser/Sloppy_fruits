@@ -1,5 +1,7 @@
 package view.allPanels;
 
+import model.model;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -7,7 +9,9 @@ import java.awt.event.ActionListener;
 public class EndWindow extends JPanel {
     JButton restart, leaderboard;
     JLabel score, thanks;
-    public EndWindow(){
+    model m;
+    public EndWindow(model m){
+        this.m = m;
         JLabel name = new JLabel("GAME OVER");
         name.setFont(new Font("Serif", Font.BOLD, 60));
         name.setForeground(Color.decode("#800080"));
@@ -16,7 +20,7 @@ public class EndWindow extends JPanel {
         thanks.setFont(new Font("Serif", Font.BOLD, 50));
         thanks.setForeground(Color.decode("#800080"));
 
-        score = new JLabel("Your score is: ");
+        score = new JLabel(m.getUsername()+" your score is: "+ m.getScore());
         score.setFont(new Font("Serif", Font.BOLD, 50));
         score.setForeground(Color.decode("#800080"));
 
@@ -60,4 +64,15 @@ public class EndWindow extends JPanel {
         leaderboard.addActionListener(listener);
         restart.addActionListener(listener);
     }
+
+    public void updateScore() {
+        score.setText(m.getUsername()+" your score is: "+ m.getScore());
+        score.revalidate();
+        score.repaint();
+    }
+
+
+
+
+
 }

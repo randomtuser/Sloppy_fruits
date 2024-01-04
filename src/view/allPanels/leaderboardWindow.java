@@ -1,11 +1,16 @@
 package view.allPanels;
 
+import model.model;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 public class leaderboardWindow extends JPanel {
     JLabel players;
-    public leaderboardWindow(){
+    model m;
+    public leaderboardWindow(model m){
+        this.m = m;
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JLabel title = new JLabel("LEADERBOARD");
         title.setFont(new Font("Serif", Font.BOLD, 80));
@@ -15,7 +20,12 @@ public class leaderboardWindow extends JPanel {
         j1.setFont(new Font("Serif", Font.PLAIN, 40));
         j1.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 20));
 
-        players = new JLabel("play a game to show players", SwingConstants.CENTER);
+
+        if(m.getUsers().isEmpty()){
+            players = new JLabel("play a game to show players", SwingConstants.CENTER);
+        }
+        else
+            players = new JLabel(displayPlayers(), SwingConstants.CENTER);
         players.setFont(new Font("Serif", Font.PLAIN, 20));
 
 
@@ -33,8 +43,30 @@ public class leaderboardWindow extends JPanel {
     }
 
 
-    //to change players
-    public void displayPlayers(String text){
-        players.setText(text);
+    public String displayPlayers() {
+        StringBuilder all = new StringBuilder("<html>");
+        for (Map.Entry<String, Integer> entry : m.getUsers().entrySet()) {
+            all.append(entry.getKey()).append(": ").append(entry.getValue()).append("<br>");
+        }
+        all.append("</html>");
+        return String.valueOf(all);
     }
+
+
+    public void display() {
+        System.out.println(displayPlayers());
+        if(m.getUsers().isEmpty()){
+            players.setText("play a game to show players");
+        }
+        else
+            players.setText(displayPlayers());
+        players.revalidate();
+        players.repaint();
+    }
+
+    public void clearPlayers(){
+        players.setText("");
+    }
+
+
 }

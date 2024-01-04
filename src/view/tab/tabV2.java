@@ -9,7 +9,7 @@ public class tabV2 extends JMenuBar {
     private JMenuItem exitItem; // JMenuItem for the exit action
 
     public tabV2(){
-        archive = new JMenu("FILE");
+        archive = new JMenu("APP");
         exitItem = new JMenuItem("Exit");
         exitItem.setActionCommand("exit");
 

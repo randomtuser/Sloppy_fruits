@@ -1,7 +1,8 @@
 package view;
 
+import model.model;
 import view.allPanels.BalanceWindow;
-import view.allPanels.gameWindow;
+import view.allPanels.*;
 import view.tab.tabv4;
 
 import javax.swing.*;
@@ -11,8 +12,10 @@ import java.security.PublicKey;
 
 public class Balance extends JFrame {
     BalanceWindow game;
-    public Balance(){
-        game  = new BalanceWindow();
+    model m;
+    public Balance(model m){
+        this.m = m;
+        game  = new BalanceWindow(m);
 
         this.add(game);
 
@@ -29,5 +32,11 @@ public class Balance extends JFrame {
     public void setActionListener(ActionListener listener){
         game.setActionListener(listener);
     }
+    public void increaseBalanceLabel() {
+        game.increaseBalanceLabel();
+    }
 
+    public int getBalance(){
+        return game.getBalance();
+    }
 }

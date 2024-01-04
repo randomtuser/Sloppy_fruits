@@ -9,23 +9,13 @@ public class tabv4 extends JMenuBar {
     private JMenuItem exitItem;
 
     public tabv4(){
-        archive = new JMenu("FILE");
+        archive = new JMenu("APP");
         exitItem = new JMenuItem("Exit");
         exitItem.setActionCommand("exit");
         archive.add(exitItem);
         this.add(archive);
 
-        LEADERBOARD = new JMenu("LEADERBOARD");
-        LEADERBOARDshow = new JMenuItem("show leaderboard");
-        LEADERBOARDshow.setActionCommand("LEADERBOARD");
-        LEADERBOARD.add(LEADERBOARDshow);
-        this.add(LEADERBOARD);
 
-        MENU = new JMenu("MENU");
-        MENUshow = new JMenuItem("return to menu");
-        MENUshow.setActionCommand("MENU");
-        MENU.add(MENUshow);
-        this.add(MENU);
 
 
 
@@ -33,8 +23,7 @@ public class tabv4 extends JMenuBar {
     }
 
     public void setActionListener(ActionListener listener){
-        MENUshow.addActionListener(listener);
-        LEADERBOARDshow.addActionListener(listener);
+
         exitItem.addActionListener(listener);
     }
 }

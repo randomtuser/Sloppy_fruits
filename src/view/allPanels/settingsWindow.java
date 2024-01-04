@@ -1,13 +1,17 @@
 package view.allPanels;
 
 import javax.swing.*;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class settingsWindow extends JPanel {
-    JTextField nameArea;
+    JTextField nameArea, balanceArea;
     JRadioButton first, second, third, YES, NO;
     JButton start;
+    ButtonGroup group ;
+    JLabel warning;
+    ButtonGroup groupWizard;
     public settingsWindow(){
         this.setLayout(new GridLayout(8, 1)); // 7 rows for components and spacing, 1 column
         JLabel settings = new JLabel("SETTINGS", SwingConstants.CENTER);
@@ -34,21 +38,36 @@ public class settingsWindow extends JPanel {
         chooseLabel.setFont(new Font("Serif", Font.BOLD, 40));
         JPanel choosePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         choosePanel.add(chooseLabel);
-        first = new JRadioButton("FRUITS");
+        first = new JRadioButton("FOOD");
         first.setFont(new Font("Serif", Font.BOLD, 30));
+        first.setSelected(true);
+        first.setActionCommand("food");
         second = new JRadioButton("HALLOWEN");
+        second.setActionCommand("halloween");
         second.setFont(new Font("Serif", Font.BOLD, 30));
-        third = new JRadioButton("TREES");
-        third.setFont(new Font("Serif", Font.BOLD, 30));
-        ButtonGroup group = new ButtonGroup();
+       // third = new JRadioButton("TREES");
+       // third.setFont(new Font("Serif", Font.BOLD, 30));
+         group = new ButtonGroup();
         group.add(first);
         group.add(second);
-        group.add(third);
+       // group.add(third);
         choosePanel.add(first);
         choosePanel.add(second);
-        choosePanel.add(third);
+     //   choosePanel.add(third);
 
         this.add(choosePanel);
+
+        // balance section
+        JLabel balanceLabel = new JLabel("Enter balance:");
+        balanceLabel.setFont(new Font("Serif", Font.BOLD, 40));
+        balanceArea = new JTextField("1");
+        balanceArea.setPreferredSize(new Dimension(200, 40)); // Set desired width and height
+        JPanel balancePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        balancePanel.add(balanceLabel);
+        balancePanel.add(balanceArea);
+
+        this.add(balancePanel);
+
 
         // Wizard section
         JLabel chooseWizard = new JLabel("Use wizard:");
@@ -59,12 +78,19 @@ public class settingsWindow extends JPanel {
         YES.setFont(new Font("Serif", Font.BOLD, 30));
         NO = new JRadioButton("NO");
         NO.setFont(new Font("Serif", Font.BOLD, 30));
-        ButtonGroup groupWizard = new ButtonGroup();
+        NO.setSelected(true);
+        groupWizard = new ButtonGroup();
         groupWizard.add(YES);
         groupWizard.add(NO);
         wizardPanel.add(YES);
         wizardPanel.add(NO);
         this.add(wizardPanel);
+
+        warning = new JLabel("", SwingConstants.CENTER);
+        warning.setFont(new Font("Serif", Font.BOLD, 80));
+        warning.setForeground(Color.decode("#800080"));
+        this.add(warning);
+
 
         // Start button section
         start = new JButton("PLAY");
@@ -77,11 +103,49 @@ public class settingsWindow extends JPanel {
         buttonPanel.add(start);
         this.add(buttonPanel);
 
+
+
+
+
     }
 
 
     public void setActionListener(ActionListener listener){
         start.addActionListener(listener);
-
     }
+    public void activateHelp(ActionListener listener){
+        YES.addActionListener(listener);
+    }
+    public void deactivateHelp(ActionListener listener){
+        NO.addActionListener(listener);
+    }
+
+
+
+    public void setTextEventListener(DocumentListener listener) {
+        balanceArea.getDocument().addDocumentListener(listener);
+    }
+
+    public String getUsername(){
+        return nameArea.getText();
+    }
+
+    public int getBalance(){
+        return Integer.parseInt(balanceArea.getText());
+    }
+
+
+    public String getTheme()
+    {
+        return String.valueOf(group.getSelection().getActionCommand());
+    }
+
+
+    public void setWarning(String warningMessage){
+        warning.setText(warningMessage);
+    }
+
+
+
+
 }
